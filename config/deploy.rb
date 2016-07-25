@@ -1,5 +1,5 @@
 set :application, 'decal-aws'
-set :repo_url, 'git@github.com:excid3/myapp.git'
+set :repo_url, 'git@github.com:dannysun2/decal-aws.git'
 
 set :deploy_to, '/home/deploy/decal-aws'
 
