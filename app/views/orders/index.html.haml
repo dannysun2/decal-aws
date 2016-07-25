@@ -1,0 +1,49 @@
+.col-md-12
+  .grid.simple
+    .grid-title.no-border
+      %h4
+        Drag n Drop
+        %span.semi-bold Uploader
+    .grid-body.no-border
+      = form_tag import_orders_path, multipart: true do
+        = file_field_tag :file
+        = submit_tag 'Submit'
+
+  .grid.simple
+    .grid-title.no-border
+    .grid-body.no-border
+      %h3
+        Orders
+        .badge.badge-important
+          = @order_count
+      %table.table.no-more-tables#orders
+        %thead
+          %tr
+            %th{:style => "width:10%"} Order ID
+            %th{:style => "width:9%"} Customer Name
+            %th{:style => "width:15%"} Recipient Name
+            %th{:style => "width:6%"} Price
+            %th{:style => "width:5%"} Actions
+        %tbody
+          - @orders.each do |order|
+            %tr
+              %td.v-align-middle
+                = order.order_key
+              %td.v-align-middle
+                = order.buyer.full_name
+              %td.v-align-middle
+                %span.muted
+                  = order.recipient.full_name
+              %td
+                %span.muted
+                = order.price
+              %td.v-align-middle
+                = link_to "View Order" ,"#modal-#{order.order_key}", :data => {:toggle=>"modal"}, class: 'btn btn-success btn-xs btn-mini'
+                = render partial: "orders/order_details", locals:{order:order, modal_id:order.order_key}
+
+:javascript
+  $('#orders').DataTable({
+    pagingType: 'full_numbers',
+    "bLengthChange": false,
+    "iDisplayLength":25,
+  });

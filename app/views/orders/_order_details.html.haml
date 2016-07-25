@@ -1,0 +1,60 @@
+.modal.fade{id:"modal-#{modal_id}", "aria-labelledby" => "orderModal", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+          %h4#requeueModal.modal-title Order Details : #{order.order_key}
+        .modal-body
+          .grid.simple
+            .grid-body.no-border.invoice-body
+              .pull-right
+                %h2 customer : #{order.buyer.full_name.downcase}
+              .clearfix
+              %br
+                %br
+                  %br
+                    .row
+                      .col-md-9
+                        %h4.semi-bold
+                          Recipient
+                        %address
+                          %strong
+                            = order.recipient.full_name
+                          %br
+                            = order.recipient.address_line_1.split(' ').map(&:capitalize).join(' ')
+                            %br
+                              = "#{order.recipient.address_city.split(' ').map(&:capitalize).join(' ')}, #{order.recipient.address_state.upcase} #{order.recipient.address_zip}"
+                              %br
+                                %abbr{:title => "Phone"} Phone:
+                                = order.recipient.phone
+                      .col-md-3
+                        %br
+                          %div
+                            %small
+                              .pull-left ORDER :
+                              .pull-right
+                                = order.order_key
+                            .clearfix
+                          %div
+                            %small
+                              .pull-left ORDER DATE :
+                              .pull-right
+                                = order.purchase_date.strftime('%B %e, %Y').upcase
+                            .clearfix
+                    %table.table
+                      %thead
+                        %tr
+                          %th.unseen.text-left{:style => "width:200px"} SKU
+                          %th.text-left DESCRIPTION
+                          %th.text-right{:style => "width:140px"} UNIT PRICE
+                      %tbody
+                      - order.items.each do |item|
+                        %tr
+                          %td.unseen.left
+                            = item.sku
+                          %td
+                            = item.product_name
+                          %td.text-right
+                            = item.price

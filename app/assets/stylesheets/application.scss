@@ -1,0 +1,39 @@
+@import 'pace-theme-flash';
+@import 'jquery-scrollbar';
+@import 'bootstrap.min';
+@import 'bootstrap-theme.min';
+@import 'font-awesome';
+@import 'animate.min';
+@import 'style';
+@import 'responsive';
+@import 'custom-icon-set';
+@import 'jquery.dataTables';
+@import 'datatables.responsive';
+
+.modal-dialog {
+    width: 850px;
+}
+
+.header .nav > li.quicklinks i {
+    font-size: 20px;
+}
+
+.page-sidebar ul.folders > li > a {
+    padding: 5px 31px;
+    font-size: 13px;
+    color: #ffffff;
+    display: block;
+    position: relative;
+}
+
+.buyer-item-line {
+  color: #f5f5f5;
+}
+
+.status-widget .title i {
+    float: right;
+    font-size: 10px;
+    margin-top: 4px;
+    margin-right: 0px;
+    color: #8b8f92;
+}

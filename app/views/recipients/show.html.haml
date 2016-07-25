@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @recipient.name
+%p
+  %strong Address line 1:
+  = @recipient.address_line_1
+%p
+  %strong Address line 2:
+  = @recipient.address_line_2
+%p
+  %strong Address city:
+  = @recipient.address_city
+%p
+  %strong Address state:
+  = @recipient.address_state
+%p
+  %strong Address zip:
+  = @recipient.address_zip
+%p
+  %strong Phone:
+  = @recipient.phone
+= link_to 'Edit', edit_recipient_path(@recipient)
+|
+= link_to 'Back', recipients_path

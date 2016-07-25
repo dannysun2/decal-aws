@@ -1,0 +1,39 @@
+.col-md-12
+  .grid.simple
+    .grid-title.no-border
+    .grid-body.no-border
+      %h3
+        Customers
+        .badge.badge-important
+          = @buyers.count
+      %table.table.no-more-tables#customers
+        %thead
+          %tr
+            %th{:style => "width:11%"} Customer Name
+            %th{:style => "width:15%"} Email
+            %th{:style => "width:6%"} Phone
+            %th{:style => "width:2%"} Action
+        %tbody
+          - @buyers.each do |buyer|
+            %tr
+              %td.v-align-middle
+                = link_to buyer.full_name ,"#modal-#{buyer.id}", :data => {:toggle=>"modal"}
+              %td.v-align-middle
+                = buyer.email
+              %td.v-align-middle
+                = buyer.phone
+              %td.v-align-right
+                - if current_user.watchlist.map{|x| x.buyer}.include? buyer
+                  .btn.btn-primary.btn-xs.btn-mini
+                    %i.fa.fa-check
+                    Watching
+                - else
+                  = link_to "Watch Buyer" , watch_user_buyers_path(user_id: buyer.id), method: :post , class: 'btn btn-green btn-xs btn-mini'
+                = render partial: "buyers/buyer_details", locals:{buyer:buyer, modal_id:buyer.id}
+
+:javascript
+  $('#customers').DataTable({
+    pagingType: 'full_numbers',
+    "bLengthChange": false,
+    "iDisplayLength":25,
+  });

@@ -1,0 +1,78 @@
+
+
+
+%body.error-body.no-top.pace-done
+  .pace.pace-inactive
+    .pace-progress{"data-progress" => "99", "data-progress-text" => "100%", :style => "transform: translate3d(100%, 0px, 0px);"}
+      .pace-progress-inner
+    .pace-activity
+  #login-form
+    .container
+      .row.login-container.column-seperation
+        .col-md-12
+          .tiles.white.p-t-20.p-l-15.p-r-15.p-b-30
+            %h2.text-center
+              Sign into
+              %span.semi-bold.text-success Decalrus Dashboard
+            %h4.text-center.muted.m-l-10.m-r-10
+              Hard work beats talent when talent fails to work hard
+            %form#frm_signup_form.m-t-30.m-l-15.m-r-15
+            = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+              .form-group
+                %label.form-label
+                  = f.label :email
+                .controls
+                  = f.email_field :email, autofocus: true, class: 'form-control'
+              .form-group
+                %label.form-label
+                  = f.label :password
+                .controls
+                  = f.password_field :password, autocomplete: "off", class: 'form-control'
+              .checkbox.checkbox.check-success
+                - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+                  = link_to "Forgot your password?", new_password_path(resource_name)
+                \&nbsp;&nbsp;
+                - if devise_mapping.rememberable?
+                  = f.check_box :remember_me
+                  = f.label :remember_me
+
+              = f.submit "Log in", class: 'btn btn-block btn-primary m-t-10 '
+      -# .col-md-5.col-md-offset-1
+      -#   %h2
+      -#     Sign into Decalrus Dashboard
+      -# .col-md-5
+      -#   %br
+      -#     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      -#       .row
+      -#         .form-group.col-md-10
+      -#           .field
+      -#             %label.form-label
+      -#               = f.label :email
+      -#             %br
+      -#             = f.email_field :email, autofocus: true, class: 'form-control'
+      -#       .row
+      -#         .form-group.col-md-10
+      -#           .field
+      -#             %label.form-label
+      -#               = f.label :password
+      -#             %br
+      -#             = f.password_field :password, autocomplete: "off", class: 'form-control'
+      -#           %span.help
+      -#       .row
+      -#         .control-group.col-md-10
+      -#           .checkbox.checkbox.check-success
+      -#             - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+      -#               = link_to "Forgot your password?", new_password_path(resource_name)
+      -#             \&nbsp;&nbsp;
+      -#             - if devise_mapping.rememberable?
+      -#               = f.check_box :remember_me
+      -#               = f.label :remember_me
+      -#       .row
+      -#         .col-md-10
+      -#           = f.submit "Log in", class: 'button btn btn-primary btn-cons pull-right'
+
+:css
+@media (min-width: 1200px)
+  .container  {
+      width: 650px;
+  }

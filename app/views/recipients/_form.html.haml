@@ -1,0 +1,39 @@
+= form_for(@recipient) do |f|
+  - if @recipient.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@recipient.errors.count, "error")
+        prohibited this recipient from being saved:
+      %ul
+        - @recipient.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name
+  .field
+    = f.label :address_line_1
+    %br/
+    = f.text_field :address_line_1
+  .field
+    = f.label :address_line_2
+    %br/
+    = f.text_field :address_line_2
+  .field
+    = f.label :address_city
+    %br/
+    = f.text_field :address_city
+  .field
+    = f.label :address_state
+    %br/
+    = f.text_field :address_state
+  .field
+    = f.label :address_zip
+    %br/
+    = f.number_field :address_zip
+  .field
+    = f.label :phone
+    %br/
+    = f.number_field :phone
+  .actions
+    = f.submit

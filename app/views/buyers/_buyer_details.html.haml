@@ -1,0 +1,53 @@
+.modal.fade{id:"modal-#{buyer.id}", "aria-labelledby" => "buyerModal", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+          %h4#requeueModal.modal-title Customer Details : #{buyer.full_name}
+        .modal-body
+          .row
+            .col-md-12
+              .grid.solid.red
+                .grid-body
+                  %h3
+                    = buyer.full_name.split(' ').first.capitalize
+                    %span.semi-bold
+                      = buyer.full_name.split(' ').last.capitalize
+              .tile-wrapper
+                .tiles.purple.m-b-10
+                  .tiles-body
+                    .tiles-title.text-black USER STATISTICS
+                    .widget-stats
+                      .wrapper.transparent
+                        %span.item-title Orders
+                        %span.item-count.animate-number.semi-bold
+                          = buyer.orders.count
+                    .widget-stats
+                      .wrapper.last
+                        %span.item-title Known Associates
+                        %span.item-count.animate-number.semi-bold
+                          = buyer.orders.map{ |x| x.recipient.full_name}.uniq.count
+              .tile-wrapper
+                .tiles.white.m-b-10
+                  .tiles-body
+                    .tiles-title RECENT ORDERS
+                    %br
+                    - buyer.orders.first(5).each do |order|
+                      .notification-messages.info
+                        .iconholder
+                          %i.icon-warning-sign
+                        .message-wrapper
+                          .heading
+                            = order.order_key
+                          .description
+                            = order.items.map{|i| i.product_name}.join(',')
+                        .date.pull-right
+                          = order.purchase_date.strftime('%B %e, %Y')
+                        .clearfix
+
+:css
+  .tile-wrapper {
+    margin-bottom: 25px;
+  }

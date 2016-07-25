@@ -1,0 +1,94 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Decalrus Dashboard
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+- if params[:controller] == 'devise/sessions'
+  = render 'devise/sessions/new'
+
+- else
+  %body
+    .header.navbar.navbar-inverse
+      .navbar-inner
+        .header-seperation
+          %ul#mevain-menu-toggle-wrapper.nav.pull-left.notifcation-center{:style => "display:none"}
+            %li.dropdown
+              %a#main-menu-toggle{:href => "#main-menu"}
+                .iconset.top-menu-toggle-white
+          %a{:href => "index.html"}
+            %img.logo{:alt => "", "data-src" => "assets/img/logo.png", "data-src-retina" => "assets/img/logo2x.png", :height => "21", :src => "#{image_path 'decalrus2x.png'}", :width => "91"}
+          %ul.nav.pull-right.notifcation-center
+            %li#header_task_bar.dropdown
+              %a.dropdown-toggle.active{"data-toggle" => "", :href => "#"}
+                = fa_icon "home"
+
+        .header-quick-nav
+          .pull-left
+            %ul.nav.quick-section
+              %li.quicklinks
+                %a#layout-condensed-toggle{:href => "#"}
+                  %i.fa.fa-bars
+            %ul.nav.quick-section
+              %li.quicklinks
+                %a{:href => "#"}
+                  %i.fa.fa-refresh
+              %li.quicklinks
+                %span.h-seperate
+              %li.quicklinks
+                %a{:href => "#"}
+                  %i.fa.fa-th-large
+              %li.m-r-10.input-prepend.inside.search-form.no-boarder
+                %span.add-on
+                  %span
+                  %i.fa.fa-search
+                %input.no-boarder{:name => "", :placeholder => "Search Orders", :style => "width:250px;", :type => "text"}/
+
+          .pull-right
+            .chat-toggler
+              %a#my-task-list.dropdown-toggle{"data-content" => "", "data-original-title" => "Notifications", "data-placement" => "bottom", "data-toggle" => "dropdown", :href => "#"}
+                .user-details
+                  .username
+                    Angela
+                    %span.bold Tran
+
+            %ul.nav.quick-section
+              %li.quicklinks
+                %a#user-options.dropdown-toggle.pull-right{"data-toggle" => "dropdown", :href => "#"}
+                  %i.fa.fa-cog
+                %ul.dropdown-menu.pull-right{"aria-labelledby" => "user-options", :role => "menu"}
+                  %li
+                    %a{:href => "#"} Account Profile
+                  %li.divider
+                  %li
+                    = link_to 'Logout', destroy_user_session_path, :method => :delete
+
+    .page-container.row-fluid
+      #main-menu.page-sidebar
+        #main-menu-wrapper.page-sidebar-wrapper.scrollbar-dynamic
+          %p.menu-title
+            NAVIGATION
+          %ul
+            %li.start.active
+              = link_to "<i class='fa fa-clone'></i><span class='title'>Orders</span><span class='badge badge-important pull-right'>#{@order_count}</span>".html_safe, orders_path, class: 'title'
+            %li
+              = link_to "<i class='fa fa-user'></i><span class='title'>Customers</span><span class='badge badge-important pull-right'>#{@customer_count}</span>".html_safe, buyers_path, class: 'title'
+          .clearfix
+          .watchlist
+            %p.menu-title
+              WATCHLIST
+            %ul.folders
+              - current_user.watchlist.each do |user|
+                .status-widget
+                  .status-widget-wrapper
+                    .title
+                      = link_to user.buyer.full_name, buyer_path(id: user.buyer.id), class: 'buyer-item-line'
+                      = link_to "<i class='fa fa-times'></i>".html_safe, unwatch_user_buyers_path(buyer_id: user.buyer.id), method: :post, class: 'remove-widget'
+      .page-content
+        .content
+          .page-title
+            %h3 Dashboard
+          = yield
+
+-# = console

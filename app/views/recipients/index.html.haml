@@ -1,0 +1,28 @@
+%p#notice= notice
+%h1 Listing Recipients
+%table
+  %thead
+    %tr
+      %th Name
+      %th Address line 1
+      %th Address line 2
+      %th Address city
+      %th Address state
+      %th Address zip
+      %th Phone
+      %th{:colspan => "3"}
+  %tbody
+    - @recipients.each do |recipient|
+      %tr
+        %td= recipient.name
+        %td= recipient.address_line_1
+        %td= recipient.address_line_2
+        %td= recipient.address_city
+        %td= recipient.address_state
+        %td= recipient.address_zip
+        %td= recipient.phone
+        %td= link_to 'Show', recipient
+        %td= link_to 'Edit', edit_recipient_path(recipient)
+        %td= link_to 'Destroy', recipient, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Recipient', new_recipient_path
