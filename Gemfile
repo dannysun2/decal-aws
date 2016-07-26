@@ -49,4 +49,5 @@ group :development do
   gem 'capistrano', '~> 3.5'
   gem 'capistrano-rails', '~> 1.1', '>= 1.1.7'
   gem 'capistrano-rvm', '~> 0.1.2'
+  gem 'capistrano-secrets-yml', '~> 1.0.0'
 end
