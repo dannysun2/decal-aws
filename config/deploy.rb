@@ -1,5 +1,6 @@
 set :application, 'decal-aws'
 set :repo_url, 'https://dannysun2:sun72587@github.com/dannysun2/decal-aws'
+
 set :deploy_to, '/home/deploy/decal-aws'
 
 set :linked_files, %w{config/database.yml}
