@@ -1,6 +1,5 @@
 # Load DSL and Setup Up Stages
 require 'capistrano/setup'
-require 'capistrano/secrets_yml'
 # Includes default deployment tasks
 require 'capistrano/deploy'
 
@@ -20,6 +19,6 @@ set :rvm_ruby_version, '2.3.1-p112'
 
 require 'capistrano/bundler'
 require 'capistrano/rails'
-
+require 'capistrano/secrets_yml'
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
