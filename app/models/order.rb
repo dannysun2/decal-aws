@@ -26,9 +26,10 @@ class Order < ActiveRecord::Base
 
         # looks at buyer email to see if it exists
         buyer = Buyer.find_or_initialize_by email: row['buyer-email']
-        recipient = Recipient.find_or_initialize_by name: row['recipient-name'].downcase, address_line_1: row['ship-address-1'].downcase
 
-        unless recipient.nil?
+        unless buyer.email.nil?
+          recipient = Recipient.find_or_initialize_by name: row['recipient-name'].downcase, address_line_1: row['ship-address-1'].downcase
+
           if buyer.new_record?
             buyer.name = row['buyer-name'].downcase
             buyer.phone = row['buyer-phone-number']
